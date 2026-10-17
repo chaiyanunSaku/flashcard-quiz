@@ -39,6 +39,18 @@ def test_add_card_with_empty_back_is_rejected():
     assert decks == {"Kanji": []}
 
 
+@pytest.mark.parametrize("back", ["|", " | ", "||"])
+def test_back_with_only_bars_is_rejected(back):
+    decks = {"Kanji": [{"front": "水", "back": "みず"}]}
+
+    with pytest.raises(ValueError, match="Card cannot be empty!"):
+        add_card(decks, "Kanji", "火", back)
+    with pytest.raises(ValueError, match="Card cannot be empty!"):
+        edit_card(decks, "Kanji", 0, back=back)
+
+    assert decks == {"Kanji": [{"front": "水", "back": "みず"}]}
+
+
 @pytest.mark.parametrize("side", ["front", "back"])
 def test_edit_to_empty_is_rejected_and_card_unchanged(side):
     # C4
