@@ -62,3 +62,13 @@ def test_empty_deck_returns_to_menu(tmp_path, monkeypatch, capsys):
     out = capsys.readouterr().out
     assert "This deck has no cards yet." in out
     assert "Bye!" in out  # the menu kept running until "exit"
+
+
+def test_broken_file_shows_message_and_is_not_overwritten(tmp_path, monkeypatch, capsys):
+    path = tmp_path / "cards.json"
+    path.write_text('{"Kanji": [', encoding="utf-8")
+
+    run_app(monkeypatch, path, [])
+
+    assert "is broken" in capsys.readouterr().out
+    assert path.read_text(encoding="utf-8") == '{"Kanji": ['

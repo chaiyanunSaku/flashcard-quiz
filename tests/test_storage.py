@@ -1,3 +1,5 @@
+import pytest
+
 from flashcard_quiz.storage import load_decks, save_decks
 
 
@@ -23,3 +25,15 @@ def test_japanese_is_saved_as_readable_text(tmp_path):
     save_decks({"Kanji": [{"front": "水", "back": "みず"}]}, path)
 
     assert "みず" in path.read_text(encoding="utf-8")
+
+
+@pytest.mark.parametrize(
+    "content",
+    ['{"Kanji": [', '["not", "decks"]', '{"Kanji": [{"front": "水"}]}'],
+)
+def test_broken_file_gives_clear_error(tmp_path, content):
+    path = tmp_path / "cards.json"
+    path.write_text(content, encoding="utf-8")
+
+    with pytest.raises(ValueError, match="is broken"):
+        load_decks(path)
