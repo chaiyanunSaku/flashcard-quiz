@@ -13,7 +13,9 @@ def normalize(text: str) -> str:
 
 def accepted_answers(back: str) -> list[str]:
     """Split a card's back into its accepted answers, e.g. 'たべる|食べる'."""
-    return [answer.strip() for answer in back.split("|") if answer.strip()]
+    # Treat the full-width bar "｜" (typed with the IME on) the same as "|".
+    parts = back.replace("｜", "|").split("|")
+    return [answer.strip() for answer in parts if answer.strip()]
 
 
 def check_answer(answer: str, back: str) -> bool:
