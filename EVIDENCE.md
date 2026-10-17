@@ -20,7 +20,7 @@ Write the first two expectations before implementation. Fill in actual results a
 
 
 ## Two review decisions
-- Plan decision: [What I accepted or changed, and why. One or two sentences.]
+- Plan decision: I accepted the AI's plan to keep the deck and answer rules in separate modules from the CLI and to test them with pytest. I changed it by designing the commands myself (`start`, `list`, `create`, `add`, `edit`, `delete`, `exit`), making every deck or card choice a numbered list for consistency, and deciding that deck names are unique ignoring case and that quiz cards are shuffled.
 - Code decision: [File/function/component, what I accepted or changed, and why. One or two sentences.]
 
 ## Automated tests

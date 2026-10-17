@@ -16,7 +16,7 @@ Students that want practice Japanese langugage writing system such as Hiragana, 
   cd flashcard-quiz
   uv sync
 - Run: `uv run flashcard-quiz`
-  The app shows a 勉強しよう！ banner and a menu: choose a deck to quiz on, add a deck or card, edit a card, or delete a card or deck. Example: choose "Quiz" → "Hiragana" → answer "あ" with "a".
+  The app shows a 勉強しよう！ banner and a list of commands.
 - Run tests: `uv run pytest`
 
 ## Author and acknowledgements
