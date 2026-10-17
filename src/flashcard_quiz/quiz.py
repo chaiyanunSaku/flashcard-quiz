@@ -1,12 +1,14 @@
 """Rules for checking answers and scoring a quiz."""
 
 import random
+import unicodedata
 from collections.abc import Callable
 
 
 def normalize(text: str) -> str:
-    """Ignore surrounding spaces (including full-width) and letter case."""
-    return text.strip().casefold()
+    """Ignore surrounding spaces (including full-width), letter case, and full-/half-width forms."""
+    # NFKC turns full-width "ａ" into "a" and half-width "ｱ" into "ア", as typed with the IME on.
+    return unicodedata.normalize("NFKC", text).strip().casefold()
 
 
 def accepted_answers(back: str) -> list[str]:
