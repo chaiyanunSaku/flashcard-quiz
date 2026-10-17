@@ -1,7 +1,7 @@
 [project]
 name = "flashcard-quiz"
 version = "0.1.0"
-description = "Add your description here"
+description = "A command-line flashcard quiz for practising Japanese: Hiragana, Katakana, Kanji and grammar."
 readme = "README.md"
 authors = [
     { name = "chaiyanunSaku", email = "ongleesaku@gmail.com" }

@@ -82,7 +82,7 @@ def list_decks(decks: Decks) -> None:
     if not decks:
         print("No decks yet. Use 'create' to make one.")
     for name, cards in decks.items():
-        print(f"  {name} ({len(cards)} cards)")
+        print(f"  {name} ({len(cards)} {'card' if len(cards) == 1 else 'cards'})")
 
 
 def add_cards(decks: Decks, deck_name: str, path: Path) -> None:

@@ -72,3 +72,14 @@ def test_broken_file_shows_message_and_is_not_overwritten(tmp_path, monkeypatch,
 
     assert "is broken" in capsys.readouterr().out
     assert path.read_text(encoding="utf-8") == '{"Kanji": ['
+
+
+def test_list_shows_card_counts(tmp_path, monkeypatch, capsys):
+    path = tmp_path / "cards.json"
+    save_decks({"Kanji": [{"front": "水", "back": "みず"}], "Hiragana": HIRAGANA}, path)
+
+    run_app(monkeypatch, path, ["list", "exit"])
+
+    out = capsys.readouterr().out
+    assert "Kanji (1 card)" in out
+    assert "Hiragana (3 cards)" in out
