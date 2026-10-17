@@ -4,7 +4,7 @@ Every function changes the given decks dict in place. A broken rule raises
 ValueError with the message to show the user, and nothing is changed.
 """
 
-from flashcard_quiz.quiz import accepted_answers
+from flashcard_quiz.quiz import accepted_answers, normalize
 
 Decks = dict[str, list[dict[str, str]]]
 
@@ -38,12 +38,12 @@ def _clean_back(text: str) -> str:
 
 
 def create_deck(decks: Decks, name: str) -> None:
-    """Add an empty deck. Names are unique ignoring case."""
+    """Add an empty deck. Names are unique ignoring case and full-/half-width forms."""
     name = name.strip()
     if not name:
         raise ValueError("Deck name cannot be empty!")
     for existing in decks:
-        if existing.casefold() == name.casefold():
+        if normalize(existing) == normalize(name):
             raise ValueError(f"Deck '{existing}' already exists!")
     decks[name] = []
 

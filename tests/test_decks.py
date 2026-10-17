@@ -30,6 +30,16 @@ def test_duplicate_deck_name_ignores_case():
     assert list(decks) == ["Kanji"]
 
 
+def test_duplicate_deck_name_ignores_full_width():
+    # Typed with the Japanese keyboard (IME) on
+    decks = {"Kanji": []}
+
+    with pytest.raises(ValueError, match="already exists"):
+        create_deck(decks, "Ｋａｎｊｉ")
+
+    assert list(decks) == ["Kanji"]
+
+
 def test_add_card_with_empty_back_is_rejected():
     decks = {"Kanji": []}
 
