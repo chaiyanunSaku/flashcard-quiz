@@ -4,6 +4,8 @@ Every function changes the given decks dict in place. A broken rule raises
 ValueError with the message to show the user, and nothing is changed.
 """
 
+from flashcard_quiz.quiz import accepted_answers
+
 Decks = dict[str, list[dict[str, str]]]
 
 
@@ -27,6 +29,14 @@ def _clean_card_text(text: str) -> str:
     return text
 
 
+def _clean_back(text: str) -> str:
+    # A back like " | " is not empty text, but it has no answer anyone could type.
+    text = _clean_card_text(text)
+    if not accepted_answers(text):
+        raise ValueError("Card cannot be empty!")
+    return text
+
+
 def create_deck(decks: Decks, name: str) -> None:
     """Add an empty deck. Names are unique ignoring case."""
     name = name.strip()
@@ -41,7 +51,7 @@ def create_deck(decks: Decks, name: str) -> None:
 def add_card(decks: Decks, deck_name: str, front: str, back: str) -> None:
     """Add a card to the end of a deck."""
     cards = _get_deck(decks, deck_name)
-    cards.append({"front": _clean_card_text(front), "back": _clean_card_text(back)})
+    cards.append({"front": _clean_card_text(front), "back": _clean_back(back)})
 
 
 def edit_card(
@@ -51,7 +61,7 @@ def edit_card(
     card = _get_card(decks, deck_name, index)
     # Check both sides before changing anything, so a rejected edit leaves the card as it was.
     new_front = _clean_card_text(front) if front is not None else card["front"]
-    new_back = _clean_card_text(back) if back is not None else card["back"]
+    new_back = _clean_back(back) if back is not None else card["back"]
     card["front"] = new_front
     card["back"] = new_back
 
