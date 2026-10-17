@@ -167,7 +167,11 @@ def delete_something(decks: Decks, path: Path) -> None:
 def main(path: Path = DEFAULT_PATH, shuffle: Callable[[list], None] = random.shuffle) -> None:
     """Run the menu until the user types exit. Tests pass their own path and shuffle."""
     _use_utf8()
-    decks = load_decks(path)
+    try:
+        decks = load_decks(path)
+    except ValueError as error:
+        print(error)
+        return
     print(BANNER)
     print(COMMANDS)
     try:
