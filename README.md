@@ -1,8 +1,7 @@
 # 勉強しよう！「Let's study!」
 
 ## Purpose
-[Who will use it, and what will it help them do? One or two sentences.]
-Students that want practice Japanese langugage writing system such as Hiragana, Katakana, Kanji, and grammar by using this flashcard CLI.
+Students that want to practice Japanese language's writing system such as Hiragana, Katakana, Kanji, and grammar by using this flashcard CLI.
 
 ## Requirements
 - R1: The user can create a named deck (e.g. Kanji) and add cards (front and back). Decks and cards are saved to 'data/cards.json' and are still there next time the app runs. Deck name must be unique, and empty fronts or backs are rejected.

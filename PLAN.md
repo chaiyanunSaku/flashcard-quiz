@@ -26,3 +26,4 @@
 6. **Realistic use** — run `uv run flashcard-quiz` as a student would. Create a "Kanji" deck with about 5 cards, including one with `|` alternatives. Quiz on it and score it, fix a card with `edit`, `exit`, restart, and confirm the deck and edit are still there. Then quiz again and delete the deck.
 
 ## Later changes, if any
+- Tests are written right after each module (storage → `test_storage.py`, decks → `test_decks.py`, and so on) instead of all at once in step 5, so each piece is shown to work before the next one is built on it.
