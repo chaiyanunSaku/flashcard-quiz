@@ -27,3 +27,4 @@
 
 ## Later changes, if any
 - Tests are written right after each module (storage → `test_storage.py`, decks → `test_decks.py`, and so on) instead of all at once in step 5, so each piece is shown to work before the next one is built on it.
+- After real use and review, input typed with the Japanese keyboard on is accepted everywhere (answers, `｜`, menu commands, y/n, deck names), because the app is for Japanese learners.

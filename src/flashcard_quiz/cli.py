@@ -9,7 +9,31 @@ from flashcard_quiz.decks import Decks, add_card, create_deck, delete_card, dele
 from flashcard_quiz.quiz import accepted_answers, check_answer, format_score, normalize, shuffled_cards
 from flashcard_quiz.storage import DEFAULT_PATH, load_decks, save_decks
 
-BANNER = "勉強しよう！"
+# Big 勉強しよう！ in block characters, generated once from the BIZ UD Gothic font.
+BANNER = """\
+                      ▄         ▄▄▄                  ▄▄
+                     ▄██████▄   ███      ███████   ▄██  ▄▄▄
+                    ▄█▀  ▄█▀  ▄▄███▄▄▄▄       ██  ▄██    ▀██
+                  ▀███████████▀▀██▀▀▀██  ▄▄▄▄▄██ ███████▀▀▀██
+                    ██▀▀██▀▀██  ██  ███  ██▀▀▀▀▀ ▄▄▄▄▄██▄▄▄▄▄
+                    ██  ██  ██ ▄██  ███  ██      ██▀▀▀██▀▀███
+                    ██████████ ██   ██   ███████ ██▄▄▄██▄▄███
+                      ██ ███ ▄██▀   ██   ▀▀   ██ ▀▀▀▀▀██▀▀▀▀▀
+                     ▄██ ███ ██  █████▄       ██      ██ ▀██
+                    ▄██  ███         ███     ▄██▄▄▄▄▄▄██▄▄███
+                  ▀██▀    ▀████████████   █████  ▀▀▀▀▀▀▀▀▀ ▀█▀
+
+     ▄▄▄                         ▄▄                 ▄▄▄                     ▄▄▄▄
+     ███                         ██                 ▀▀██████▄               ████
+     ███                         ██▄▄▄▄▄▄▄▄                ▀▀               ▀██▀
+     ███                         ██▀▀▀▀▀▀▀▀     ▄▄▄▄█████████▄               ██
+     ███                         ██             ▀▀▀▀▀       ▀██              ██
+     ███          ▄█▄            ██                          ██              ██
+     ███         ▄██      ▄▄███████▄▄                        ██              ██
+     ███        ▄██▀     ██▀     ██▀████▄                  ▄██▀              ▀▀
+      ███▄▄  ▄▄███▀      ███    ▄██   ▀▀███           ▄▄▄▄███▀              ▄▄▄▄
+       ▀▀██████▀▀         ▀▀█████▀       ▀          ████▀▀▀                 ████
+"""
 COMMANDS = """Commands:
   start   Quiz yourself on a deck
   list    Show all decks
