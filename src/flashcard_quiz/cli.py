@@ -6,7 +6,7 @@ from collections.abc import Callable
 from pathlib import Path
 
 from flashcard_quiz.decks import Decks, add_card, create_deck, delete_card, delete_deck, edit_card
-from flashcard_quiz.quiz import accepted_answers, check_answer, format_score, shuffled_cards
+from flashcard_quiz.quiz import accepted_answers, check_answer, format_score, normalize, shuffled_cards
 from flashcard_quiz.storage import DEFAULT_PATH, load_decks, save_decks
 
 BANNER = "勉強しよう！"
@@ -27,15 +27,20 @@ def _use_utf8() -> None:
             stream.reconfigure(encoding="utf-8")
 
 
+def ask(prompt: str) -> str:
+    """Read a menu answer, ignoring spaces, case and full-width letters typed with the IME on."""
+    return normalize(input(prompt))
+
+
 def ask_yes_no(prompt: str) -> bool:
-    return input(prompt).strip().casefold() == "y"
+    return ask(prompt) == "y"
 
 
 def choose(items: list[str], prompt: str) -> int | None:
     """Print a numbered list and return the chosen index, or None if the choice is invalid."""
     for number, item in enumerate(items, start=1):
         print(f"  {number}. {item}")
-    choice = input(prompt).strip()
+    choice = ask(prompt)
     if choice.isdecimal() and 1 <= int(choice) <= len(items):
         return int(choice) - 1
     print("Invalid choice.")
@@ -123,7 +128,7 @@ def edit_a_card(decks: Decks, path: Path) -> None:
     index = choose_card(decks, name)
     if index is None:
         return
-    side = input("Edit front, back or both? ").strip().casefold()
+    side = ask("Edit front, back or both? ")
     if side not in ("front", "back", "both"):
         print("Invalid choice.")
         return
@@ -139,7 +144,7 @@ def edit_a_card(decks: Decks, path: Path) -> None:
 
 
 def delete_something(decks: Decks, path: Path) -> None:
-    kind = input("Delete deck or card? ").strip().casefold()
+    kind = ask("Delete deck or card? ")
     if kind == "deck":
         name = choose_deck(decks)
         if name is None:
@@ -176,7 +181,7 @@ def main(path: Path = DEFAULT_PATH, shuffle: Callable[[list], None] = random.shu
     print(COMMANDS)
     try:
         while True:
-            command = input("\n> ").strip().casefold()
+            command = ask("\n> ")
             if command == "start":
                 run_quiz(decks, shuffle)
             elif command == "list":

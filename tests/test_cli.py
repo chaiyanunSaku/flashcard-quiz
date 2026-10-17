@@ -83,3 +83,15 @@ def test_list_shows_card_counts(tmp_path, monkeypatch, capsys):
     out = capsys.readouterr().out
     assert "Kanji (1 card)" in out
     assert "Hiragana (3 cards)" in out
+
+
+def test_full_width_menu_input_is_accepted(tmp_path, monkeypatch):
+    # Typed with the Japanese keyboard (IME) on: ｙ, ｃｒｅａｔｅ, ｄｅｌｅｔｅ, ｄｅｃｋ, １
+    path = tmp_path / "cards.json"
+    save_decks({"Kanji": KANJI}, path)
+
+    run_app(monkeypatch, path, ["ｃｒｅａｔｅ", "Grammar", "ｙ", "hi", "おはよう", "n", "exit"])
+    assert load_decks(path)["Grammar"] == [{"front": "hi", "back": "おはよう"}]
+
+    run_app(monkeypatch, path, ["ｄｅｌｅｔｅ", "ｄｅｃｋ", "１", "ｙ", "exit"])
+    assert "Kanji" not in load_decks(path)
