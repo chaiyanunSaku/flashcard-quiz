@@ -12,6 +12,15 @@ def test_answer_ignores_surrounding_spaces_and_case(answer, back):
     assert check_answer(answer, back)
 
 
+@pytest.mark.parametrize(
+    ("answer", "back"),
+    [("ａ", "a"), ("ＴＡＢＥＲＵ", "taberu"), ("ｱ", "ア")],
+)
+def test_full_width_and_half_width_typing_is_accepted(answer, back):
+    # Typed with the Japanese keyboard (IME) on: full-width letters, half-width katakana
+    assert check_answer(answer, back)
+
+
 def test_wrong_answer_is_rejected():
     # C1: "o" for う
     assert not check_answer("o", "u")
