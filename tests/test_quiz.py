@@ -47,6 +47,13 @@ def test_spaces_around_bar_are_ignored():
     assert check_answer("すい", "みず | すい")
 
 
+def test_full_width_bar_separates_alternatives():
+    # Card back typed with the Japanese keyboard (IME) on uses "｜" instead of "|"
+    assert accepted_answers("日｜び") == ["日", "び"]
+    assert check_answer("び", "日｜び")
+    assert check_answer("日", "日｜び")
+
+
 def test_shuffled_cards_uses_given_shuffle_and_keeps_original():
     cards = [{"front": "あ", "back": "a"}, {"front": "い", "back": "i"}]
 
