@@ -1,2 +1,5 @@
+from flashcard_quiz import cli
+
+
 def main() -> None:
-    print("Hello from flashcard-quiz!")
+    cli.main()
